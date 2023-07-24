@@ -12,12 +12,14 @@ import Home from "./pages/home/Home";
 import Details from "./pages/details/Details";
 import SearchResult from "./pages/searchResult/SearchResult";
 import Explore from "./pages/explore/Explore";
+import PageNotFound from "./pages/404/pageNotFound";
 
 function App() {
   const dispatch = useDispatch()
   const {url} = useSelector((state) => state.home);
   console.log(url);
 
+  // Every time we need to call an API in any component we need a useEffect method and boiler plate code is needed to written.
   useEffect(() => {
     apiTesting();
   }, [])
