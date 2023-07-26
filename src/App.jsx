@@ -21,19 +21,26 @@ function App() {
 
   // Every time we need to call an API in any component we need a useEffect method and boiler plate code is needed to written.
   useEffect(() => {
-    apiTesting();
+    fetchApiConfig();
   }, [])
 
-  const apiTesting = () => {
-    fetchDataFromApi('/movie/popular').then((res) => {
-        console.log(res)
+  const fetchApiConfig = () => {
+    fetchDataFromApi('/configuration').then((res) => {
+        console.log(res);
+
+        const url = {
+          backdrop: res.images.secure_base_url + "original", 
+          poster: res.images.secure_base_url + "original", 
+          profile: res.images.secure_base_url + "original", 
+        }
+
         dispatch (getApiConfiguration
-          (res));
+          (url)); //passing url in action so that it can be stored in the store.
       });
   };
   
   return (<BrowserRouter>
-  {/* <Header /> */}
+  <Header />
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/:mediaType/:id" element={<Details />} />
