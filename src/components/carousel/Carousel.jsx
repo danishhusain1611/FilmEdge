@@ -10,6 +10,7 @@ import dayjs from "dayjs"; //the release date date from the API is in a differen
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import Img from "../lazyLoadImage/Img";
 import PosterFallback from "../../assets/no-poster.png";
+import CircleRating from "../circleRating/CircleRating";
 
 import "./style.scss";
 
@@ -52,9 +53,12 @@ const Carousel = ({ data, loading }) => {
                     return (
                         <div 
                         key={item.id} //each movie card in the carousel section have a differnt id which we have passed here.
+                        //data coming from the API is a floating number toFixed will eliminate all the values after first decimal number.
                         className="carouselItem">
                             <div className="posterBlock">
                                 <Img src={posterUrl} />
+                                <CircleRating rating=
+                                {item.vote_average.toFixed(1)}/> 
                             </div>
                             <div className="textBlock">
                                 <span className="title">
@@ -63,7 +67,7 @@ const Carousel = ({ data, loading }) => {
                                 <span className="date">
                                     {dayjs(item.release_Date).format
                                     ("MMM D, YYYY")} 
-                                </span>
+                                </span> 
                             </div>
                         </div>
                     );
@@ -82,4 +86,4 @@ const Carousel = ({ data, loading }) => {
   </div>; //if i want this div reference i will use "ref" tag to take its reference.
 };
 
-export default Carousel
+export default Carousel;
