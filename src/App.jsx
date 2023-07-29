@@ -4,7 +4,7 @@ import { fetchDataFromApi } from "./utils/api";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import { getApiConfiguration } from "./store/homeSlice";
+import { getApiConfiguration, getGenres } from "./store/homeSlice";
 
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
@@ -22,6 +22,7 @@ function App() {
   // Every time we need to call an API in any component we need a useEffect method and boiler plate code is needed to written.
   useEffect(() => {
     fetchApiConfig();
+    genresCall();
   }, []);
 
   const fetchApiConfig = () => {
@@ -36,6 +37,27 @@ function App() {
 
       dispatch(getApiConfiguration(url)); //passing url in action so that it can be stored in the store.
     });
+  };
+
+  const genresCall = async () => {
+    let promises = [] //two API call methods are there in promises array.
+    let endPoints = ["tv", "movie"]
+    let allGenres = {} //object created.
+
+    //forEach is just a for loop and we are creating a for loop over endPoints.
+    //taking iterator name as URL
+    endPoints.forEach((url) => {
+      promises.push(fetchDataFromApi(`/genre/${url}/list`))
+    });
+
+    const data = await Promise.all(promises);
+    data.map(({genres}) => {
+      return genres.map((item) => (allGenres[item.id] =
+      item))
+    });
+
+    dispatch(getGenres(allGenres));
+
   };
 
   return (
