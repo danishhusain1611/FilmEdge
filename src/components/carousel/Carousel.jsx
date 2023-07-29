@@ -15,7 +15,7 @@ import Genres from "../genres/Genres";
 
 import "./style.scss";
 
-const Carousel = ({ data, loading }) => {
+const Carousel = ({ data, loading, endpoint }) => {
     const carouselContainer = useRef(); //wherever we pass this variable "carouselContainer" we will get that div reference.
     const {url} = useSelector((state) => state.home);
     const navigate = useNavigate();
@@ -66,7 +66,8 @@ const Carousel = ({ data, loading }) => {
                         <div 
                         key={item.id} //each movie card in the carousel section have a differnt id which we have passed here.
                         //data coming from the API is a floating number toFixed will eliminate all the values after first decimal number.
-                        className="carouselItem" onClick={() => navigate(`${item.media_type}/${item.id}`)}>
+                        className="carouselItem" onClick={() => navigate(`/${item.media_type || 
+                        enpoint}/${item.id}`)}>
                             <div className="posterBlock">
                                 <Img src={posterUrl} />
                                 <CircleRating rating=
