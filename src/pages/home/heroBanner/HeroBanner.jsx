@@ -40,7 +40,7 @@ const HeroBanner = () => {
       <div className="opacity-layer"></div>
       <ContentWrapper>
         <div className="heroBannerContent">
-          <span className="title">FilmEdge</span>
+          <span className="title">Welcome.</span>
           <span className="subTitle">
             Millions of movies, T.V. shows and people to discover. Explore now.
           </span>

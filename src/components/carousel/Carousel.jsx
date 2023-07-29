@@ -67,7 +67,7 @@ const Carousel = ({ data, loading, endpoint }) => {
                         key={item.id} //each movie card in the carousel section have a differnt id which we have passed here.
                         //data coming from the API is a floating number toFixed will eliminate all the values after first decimal number.
                         className="carouselItem" onClick={() => navigate(`/${item.media_type || 
-                        enpoint}/${item.id}`)}>
+                        endpoint}/${item.id}`)}>
                             <div className="posterBlock">
                                 <Img src={posterUrl} />
                                 <CircleRating rating=
