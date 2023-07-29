@@ -20,7 +20,18 @@ const Carousel = ({ data, loading }) => {
     const {url} = useSelector((state) => state.home);
     const navigate = useNavigate();
 
-    const navigation = (dir) => {};
+    const navigation = (dir) => {
+        const container = carouselContainer.current;
+        const scrollAmount = dir === "left" ? container.scrollLeft -
+        (container.offsetWidth + 20) :
+        container.scrollLeft +
+        (container.offsetWidth + 20);
+
+    container.scrollTo({
+        left: scrollAmount,
+        behavior: "smooth",
+    })
+    };
 
     const skItem = () => {
         return (
@@ -36,17 +47,17 @@ const Carousel = ({ data, loading }) => {
     
 
   return <div className="carousel">
-    <ContentWrapper>
+      <ContentWrapper>
         <BsFillArrowLeftCircleFill 
             className="carouselLeftNav arrow"
             onClick={() => navigation("left")}
-        />
+            />
         <BsFillArrowRightCircleFill
             className="carouselRightNav arrow"
             onClick={() => navigation("right")}
-        />
+            />
         {!loading ? (
-            <div className="carouselItems">
+            <div className="carouselItems" ref={carouselContainer}>
                 {data?.map((item) => {
                     const posterUrl = item.poster_path  //as URL is too long we passed item.poster_path in posterURL and then passed it into posterBlock.
                     ? url.poster + item.poster_path 
@@ -55,7 +66,7 @@ const Carousel = ({ data, loading }) => {
                         <div 
                         key={item.id} //each movie card in the carousel section have a differnt id which we have passed here.
                         //data coming from the API is a floating number toFixed will eliminate all the values after first decimal number.
-                        className="carouselItem">
+                        className="carouselItem" onClick={() => navigate(`${item.media_type}/${item.id}`)}>
                             <div className="posterBlock">
                                 <Img src={posterUrl} />
                                 <CircleRating rating=
