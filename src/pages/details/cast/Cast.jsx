@@ -5,7 +5,7 @@ import "./style.scss";
 
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 import Img from "../../../components/lazyLoadImage/Img";
-import avatar from "../../../assets/avatar.png"; //this fallback image will be used in case cast photo is not fetched from the API.
+import avatar from "../../../assets/avatar.png";
 
 const Cast = ({ data, loading }) => {
     const { url } = useSelector((state) => state.home);
@@ -22,23 +22,24 @@ const Cast = ({ data, loading }) => {
     return (
         <div className="castSection">
             <ContentWrapper>
-                <div className="sectionHeading">Cast</div>
+                <div className="sectionHeading">Top Cast</div>
                 {!loading ? (
                     <div className="listItems">
-                        {data.map((item) => {
-                            let imgUrl = item.profile_path ? url.profile 
-                            + item.profile_path : avatar;
+                        {data?.map((item) => {
+                            let imgUrl = item.profile_path
+                                ? url.profile + item.profile_path
+                                : avatar;
                             return (
                                 <div key={item.id} className="listItem">
                                     <div className="profileImg">
                                         <Img src={imgUrl} />
                                     </div>
-                                    <div className="name">
-                                        {item.name}
+                                    <div className="name">{item.name}</div>
+                                    <div className="character">
+                                        {item.character}
                                     </div>
-                                    <div className="character">{item.character}</div>
                                 </div>
-                            )
+                            );
                         })}
                     </div>
                 ) : (

@@ -7,27 +7,24 @@
     display: flex;
     align-items: center;
     position: relative;
-    //nesting mixin inside parent class (useful feature of scss. Will use it below also.)
-    //@include is used to add mixin.
     @include md {
         height: 700px;
     }
     .backdrop-img {
         width: 100%;
         height: 100%;
-        position: absolute; //because we will place search bar just above it.
+        position: absolute;
         top: 0;
         left: 0;
         opacity: 0.5;
-        overflow:hidden;
-        //nesting a class inside parent class (feature of scss which is not availabe in normal css.
+        overflow: hidden;
         .lazy-load-image-background {
             width: 100%;
             height: 100%;
             img {
                 width: 100%;
                 height: 100%;
-                object-fit: cover; //this object-fit attribute will adjust the backgorund image inside the browser.
+                object-fit: cover;
                 object-position: center;
             }
         }
@@ -38,7 +35,7 @@
         background: linear-gradient(
             180deg,
             rgba(4, 21, 45, 0) 0%,
-            #04125d 79.17%
+            #04152d 79.17%
         );
         position: absolute;
         bottom: 0;
@@ -56,13 +53,14 @@
         .title {
             font-size: 50px;
             font-weight: 700;
+            margin-bottom: 10px;
             @include md {
                 margin-bottom: 0;
                 font-size: 90px;
             }
         }
         .subTitle {
-            font: 18px;
+            font-size: 18px;
             font-weight: 500;
             margin-bottom: 40px;
             @include md {
@@ -92,7 +90,7 @@
             button {
                 width: 100px;
                 height: 50px;
-                background: var(--gradient); //gradient is a background image that is why it will applied as a background not as background-color.
+                background: var(--gradient);
                 color: white;
                 outline: 0;
                 border: 0;
@@ -100,7 +98,7 @@
                 font-size: 16px;
                 cursor: pointer;
                 @include md {
-                    width: 50px;
+                    width: 150px;
                     height: 60px;
                     font-size: 18px;
                 }

@@ -73,7 +73,8 @@ const Header = () => {
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}> 
       <ContentWrapper>
-        <div className="logo">
+        {/* here navigate method is used to redirect to home page whenever we click on the header logo. */}
+        <div className="logo" onClick={() => navigate("/")}> 
           <img src={logo} alt="" />
         </div>
         <ul className="menuItems">
